@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<head>
+<meta http-equiv="content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<link href="content.css" rel="stylesheet" type="text/css" />
+<title>リンクビュー</title>
+</head>
+
+<body>
+<h1>リンクビューの機能</h1>
+
+<h2>リンクビューの表示</h2>
+<p>リンクビューには、 </p>
+<ul>
+  <li>選択されているノードから他のノードへつながっているリンク</li>
+  <li>選択されているノードにつながっている他のノードからのリンク</li>
+  <li>選択されているノードから他のファイルへのリンク</li>
+  <li>選択されているノードから他のiEditファイルへのリンク</li>
+  <li>選択されているノードから他のフォルダへのリンク</li>
+  <li>選択されているノードからWebのURLへのリンク</li>
+</ul>
+が表示されます。アウトラインビュー上の階層が違うノード間のリンクは水色のアイコンで表示されます。
+<p>それぞれのアイコンは右下の図のようになっています。</p>
+<p>アイコンをダブルクリックすることでリンク先(元)のノードにジャンプできます。リンクビューの右クリックメニューからジャンプ元のノードに戻ることも可能です。</p><p>ファイルへのリンクの場合は拡張子に関連づけられたアプリケーションでそのファイルを開きます。URLの場合は、Webブラウザーでリンク先のページを開きます。</p>
+<table align="center" cellpadding="30">
+  <tr>
+    <td><img src="linkview.gif" /></td>
+    <td><img src="linkicons.gif" /></td>
+  </tr>
+</table>
+
+<h3>ラベルのインライン編集</h3>
+リンクのラベルはインラインで編集できます。
+<div class="imgbox"><img src="llnklbl.gif" /></div>
+
+
+<h2>ファイルのドラッグ＆ドロップ機能</h2>
+<p>リンクビューにファイルをドラッグ＆ドロップ可能です。</p>
+<table align="center" cellpadding="5">
+  <tr>
+    <td><div class="imgbox"><img src="drgfile.gif" /></div>
+        <div class="caption">エクスプローラからファイルを<br />
+    ドラッグ＆ドロップすると．．．<div></td>
+    <td><div class="imgbox"><img src="arrow_right.png" /></div></td>
+    <td><div class="imgbox"><img src="drpfile.gif"/></div>
+        <div class="caption">ファイル名をリンク名とするリンクができます。</div></td>
+  </tr>
+  <tr>
+    <td><div class="imgbox"><img src="drgdir.gif" /></div>
+        <div class="caption">エクスプローラからフォルダを<br />
+        ドラッグ＆ドロップすると．．．</div></td>
+    <td><div class="imgbox"><img src="arrow_right.png" /></div></td>
+    <td><div class="imgbox"><img src="drpdir.gif" /></div>
+        <div class="caption">フォルダ名をリンク名とするリンクができます。</div></td>
+  </tr>
+</table>
+
+<p>iEditファイルをドラッグ＆ドロップするとファイルを開くかリンクとして登録するかをダイアログで選択することになります。</p>
+
+<div class="detail"><a href="iedx/dnd_dialog.html" target="_blank">ファイルのドラッグ＆ドロップ</a></div>
+<h3>ファイルへのリンクの作成</h3>
+<p>ドラッグ＆ドロップでななく、リンクビューで右クリックしてコンテキストメニューから「他のファイル/URLへのリンク」を選択してもファイルのリンクを追加できます。</p>
+<p>ドラッグ＆ドロップでファイルリンクを作成した場合は、ファイルのフルパスが設定されます。リンクプロパティ設定ダイアログでリンク元のiEditファイルからの相対パスを指定することもできます。</p>
+<div class="detail"><a href="iedx/linkprop_dialog.html" target="_blank">リンクプロパティ設定ダイアログの詳細</a></div>
+
+<h2>URLオブジェクトのドラッグ＆ドロップ</h2>
+Webブラウザーのお気に入り(ブックマーク)、アドレスバーのURLアドレス、Webページ上のリンクをドラッグしてリンクビューにドロップするとURLリンクができます。リンク名は「URLリンク」にしています。 
+<table align="center" cellpadding="5">
+  <tr>
+    <td><div class="imgbox"><img src="drgurl.gif"/></div>
+        <div class="caption">IEやFirefoxの「お気に入り/ブックマーク」からリンクを<br />
+        ドラッグ＆ドロップすると．．．</div></td>
+    <td><div class="imgbox"><img src="arrow_right.png" /></div></td>
+    <td><div class="imgbox"><img src="drpurl.gif" /></div>
+        <div class="caption">URLリンクができます。(※)</div></td>
+  </tr>
+</table>
+
+<p>※インターネットショートカット呼ばれる拡張子「.url」のファイルを認識してURLリンクを作ります。</p>
+
+
+<h3><a name="ブックマーク" id="ブックマーク">Webのブックマーク集に使えます</a></h3>
+<p>　リンクビューにURLの情報を分野別に階層化して整理すると便利です。</p>
+<p>
+  <center>
+    <img src="bookmarks.gif" width="289" height="217" />
+  </center>
+</p>
+</body>
+</html>

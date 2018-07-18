@@ -1,0 +1,136 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<head>
+<meta http-equiv="content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<link href="content.css" rel="stylesheet" type="text/css" />
+<title>ツールバー</title>
+</head>
+
+<body>
+<h1>ツールバー</h1>
+<h2>標準ツールバー</h2>
+<div class="imgbox"><img src="toolbar.png" /></div>
+
+<h3>ファイル</h3>
+<div class="imgbox_l"><img src="toolbar_file.png"/></div>
+<ol>
+  <li>新規作成</li>
+  <li>ファイルを開く</li>
+  <li>編集中のファイルを保存</li>
+</ol>
+
+<h3>アウトライン</h3>
+<div class="imgbox_l"><img src="toolbar_outline.png" /></div>
+<ol>
+  <li>  選択中のノードと同じ階層にノードを追加</li>
+  <li>選択中のノードの子階層にノードを追加</li>
+  <li>選択中のノードを1階層下に下げる</li>
+  <li>選択中のノードを1階層上に上げる</li>
+  <li>選択中のノードの階層内の順位を上げる</li>
+  <li>選択中のノードの階層内の順位を下げる</li>
+</ol>
+
+<h3><a name="tb_pallet" id="tb_pallet"></a>パレット</h3>
+<div class="imgbox_l"><img src="toolbar_netview.png" /></div>
+<ol>
+  <li>選択モード</li>
+  <li>矩形ノード追加モード</li>
+  <li>角丸矩形ノード追加モード</li>
+  <li>楕円ノード追加モード</li>
+  <li>文字ラベルノード追加モード  </li>
+  <ul>
+    <li>矩形や塗りつぶしを行わない文字ラベルのみのノードを追加します。文字ラベルのみのノードは、ラベルの文字数にフィットするようにサイズ調整されます。</li>
+  </ul>
+  <li>矢印なしリンク追加モード</li>
+  <li>一方向矢印リンク追加モード</li>
+  <li>双方向矢印リンク追加モード</li>
+</ol>
+
+<h3>リンク属性のプリセット</h3>
+<div class="imgbox_l"><img src="toolbar_linkprop.png" /></div>
+<ol>
+  <li>リンク線の種類、太さをプリセット  
+    <ul>
+      <li>ホイールボタンでのリンク追加時に線の種類をあらかじめ指定するドロップダウンボタンです。</li>
+    </ul>
+  </li>
+  <li>リンク矢印のつき方をプリセット
+    <ul>
+      <li>ホイールボタンでのリンク追加時に矢印のつき方をあらかじめ指定するドロップダウンボタンです</li>
+    </ul>
+  </li>
+</ol>
+<p>※<a href="netview_i.html#linkPreset">マウスホイールボタンによるリンク／関連ノードの追加</a> を参照</p>
+
+<h3>ズーム倍率</h3>
+<div class="imgbox_l"><img src="toolbar_zoom.png" /></div>
+<ol>
+  <li>ズームモードボタン  </li>
+  <ul>
+    <li>このルーペアイコンを選択し、ネットワークビュー上で左ボタンクリックで、ズームイン、右ボタンクリックでズームアウト、ホイールボタン上回転でズームイン、ホイールボタン下回転でズームアウトします。</li>
+  </ul>
+  <li>ズーム倍率指定プルダウンメニュー
+    <ul>
+      <li>プルダウンメニューから倍率を指定します。メニューの一番下の｢全体表示」を選択するとネットワークビューのサイズに合わせて、図全体がフィットするように調整されます。</li>
+    </ul>
+  </li>
+</ol>
+
+<h3>その他</h3>
+<div class="imgbox_l"><img src="toolbar_etc.png" /></div>
+<ol>
+  <li>つかんでスクロールモード</li>
+  <li>強制再描画</li>
+  <li>簡易グループ化機能とアウトラインを連動</li>
+</ol>
+<p>※<a href="tree_and_net.html#cooperation">簡易グループ化機能とアウトライン連携</a> を参照</p>
+
+<h2>書式設定ツールバー</h2>
+<div class="imgbox"><img src="formatbar.png" /></div>
+
+<h3>ノードラベルのアライメント</h3>
+<div class="imgbox_l"><img src="formatbar_alignment.png"/></div>
+<ol>
+  <li>左寄せ</li>
+  <li>中央揃え</li>
+  <li>右寄せ</li>
+  <li>天配置</li>
+  <li>中央</li>
+  <li>地配置</li>
+</ol>
+
+<h3><a name="tb_nodeFormat" id="tb_nodeFormat"></a>ノードのフォント・行モード</h3>
+<div class="imgbox_l"><img src="toolbar_format.png" /></div>
+<ol>
+  <li>選択中のノードをシングル行表示にする </li>
+  <ul>
+    <li>ネットワークビューで選択されているノードをシングル行表示にします。マルチ行からシングル行にするときは、ノードの大きさもラベルの文字数に合わせて再設定されます。複数ノードが選択されている場合は選択されたすべてのノードに対して実行されます。</li>
+  </ul>
+  <li>選択中のノードをマルチ行表示にする
+    <ul>
+      <li>ネットワークビューで選択されているノードをマルチ行表示にします。シングル行からマルチ行にするときは、ラベルの文字数が長い場合(50文字以上)は、ノードのサイズが行数にあわせて再設定されます。複数ノードが選択されている場合は選択されたすべてのノードに対して実行されます。</li>
+    </ul>
+  </li>
+  <li>選択中のノードのフォントを大きくする  </li>
+  <ul>
+    <li>ネットワークビューで選択されているノードを1段階大きくします。ノードの大きさもフォントサイズに合わせて拡大します。複数ノードが選択されている場合は選択されたすべてのノードに対して実行されます。</li>
+  </ul>
+  <li>選択中のノードのフォントを小さくする </li>
+  <ul>
+    <li>ネットワークビューで選択されているノードを1段階小さくします。ノードの大きさもフォントサイズに合わせて縮小します。複数ノードが選択されている場合は選択されたすべてのノードに対して実行されます。</li>
+  </ul>
+</ol>
+<p>※<a href="netview.html#adjust">入力文字数・フォントサイズ等によるノードのサイズ・スタイルの自動調整</a> を参照</p>
+
+<h3>ノード書式</h3>
+<div class="imgbox_l"><img src="format_pal.png" /></div>
+<ol>
+  <li>ノード色設定のカラーダイアログ</li>
+  <li>ノード・リンク色設定のカラーダイアログ</li>
+  <li>フォント色設定のカラーダイアログ</li>
+  <li>書式を適用</li>
+  <ul>任意のノードの書式(塗りつぶし色など)を保存して、このボタンでカーソルを書式適用モードに変えます。クリックしたノードの書式が保存書式に変更されます。</ul>
+</ol>
+
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<head>
+<meta http-equiv="content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<link href="content.css" rel="stylesheet" type="text/css" />
+<title>ネットワークビューでの入力</title>
+</head>
+
+<body>
+<h1>ネットワークビューでの便利な入力方法</h1>
+
+<h2><a name="wheel" id="wheel">マウスホイールボタンによるリンク／関連ノードの追加</a></h2>
+<p>マウスホイールボタンを使うとリンク作成や関連ノードの作成が楽にできます。</p>
+
+<h3>リンクの追加</h3>
+<p>ノードＡとＢの間にリンクを張るには、ツールバーでリンクを選び、ノードＡをクリックしてドラッグしノードＢ上でドロップするのが標準的な方法ですが、ホイールボタンを使うと、ツールバーに手を伸ばさなくてもすぐさまリンクを張ることができます。マウスの移動量が少なくなるので楽です。やり方はノードＡ上でホイールボタンをクリックし、ドラッグしてノードＢ上でドロップするだけです。</p>
+<table align="center">
+  <tr>
+    <td><img src="wheel1.png" /></td>
+    <td><img src="arrow_right.png" /></td>
+    <td><img src="wheel2.png" /></td>
+  </tr>
+  <tr>
+    <td class="caption">ノードＡ上でホイールボタンをクリックするとリンク追加モードに入ります。</td>
+    <td>&nbsp;</td>
+    <td class="caption">ノードＢまでドラッグしてボタンをリリースすると</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td><img src="arrow_down.png" /></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td><img src="wheel3.png" /></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td class="caption">ＡからＢへのリンクが作成されます。</td>
+  </tr>
+</table>
+
+<h3>関連ノードの追加</h3>
+<p>ノードAに関連する新しいノードBを作成したいとします。通常の操作では、まずリンク先となる新しいノードBを作成しその上でAとBにリンクを張るという手順になります。マウスホイールボタンを使うと、AからドラッグしてBの作成とリンクを張る作業を一度に行うことができます。</p>
+<table align=center>
+  <tr>
+    <td><img src="wheel4.png" /></td>
+    <td><img src="arrow_right.png" /></td>
+    <td><img src="wheel5.png" /></td>
+  </tr>
+  <tr>
+    <td class="caption">ノードＡ上でホイールボタンをクリックするとリンク追加モードに入ります。</td>
+    <td>&nbsp;</td>
+    <td class="caption">ドラッグしてノードのない領域でボタンをリリースするとノード作成用の選択メニューが表示されます。</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td><img src="arrow_down.png" /></td>
+  </tr>
+  <tr>
+    <td><img src="wheel7.png" /></td>
+    <td><img src="arrow_left.png" /></td>
+    <td><img src="wheel6.png" /></td>
+  </tr>
+  <tr>
+    <td class="caption">これで、AとリンクしたノードCが作成されました。</td>
+    <td>&nbsp;</td>
+    <td class="caption">ノードタイプを選択すると、新しいノードとリンクが作成されノードラベル入力ダイアログが表示されるので、ラベルを入力します。</td>
+  </tr>
+</table>
+
+<h4><a name="linkPreset" id="linkPreset"></a>作成されるリンクの属性をあらかじめ設定する</h4>
+<p>リンク線の種類(実線／点線、太さ)と矢印の種類は、ツールバーのドロップダウンボタンで選択されているものが設定されます。</p>
+<table align="center">
+  <tr>
+    <td><img src="tb_line.png" /></td>
+    <td><img src="tb_arrow.png" /></td>
+  </tr>
+  <tr>
+    <td class="caption">線の種類(太さ、実線/点線)<br />を選択します</td>
+    <td class="caption">矢印のつき方<br />(なし、一方向、双方向)<br />を選択します。</td>
+  </tr>
+</table>
+
+<h2><a name="mindmap" id="mindmap">MindMap的入力機能</a></h2>
+<p>MindMapツールのような操作を提供しています。MindMapはノードとリンクの組み合わせで作成可能ですが、従来の操作では、<br /><br />
+ノードの追加 ⇒ リンクの追加 ⇒ レイアウト修正<br /><br />
+という操作を毎回行う必要があるため煩雑です。この機能ではInsertキー、Shift+Enterキーで現在のノードに関連するノードとリンクが作成され、新しいノードの編集モードになります。また新しいノードの位置は自動レイアウトのアルゴリズムで自動的に再配置され、スピーディにマインドマップ的なダイアグラムを作図することが可能です。</p>
+<table align="center">
+  <tr>
+    <td ><div class="imgbox"><img src="mind1.png" /></div></td>
+    <td ><div class="imgbox"><img src="arrow_right.png"/></div></td>
+    <td ><div class="imgbox"><img src="mind2.png" /></div></td>
+  </tr>
+  <tr>
+    <td class="caption">この状態でInsertキーを押すと</td>
+    <td>&nbsp;</td>
+    <td class="caption">ノードとリンクが追加され、ラベル編集状態になります。</td>
+  </tr>
+  <tr>
+    <td><div class="imgbox"><img src="mind3.png" /></div></td>
+    <td><div class="imgbox"><img src="arrow_right.png" /></div></td>
+    <td><div class="imgbox"><img src="mind4.png" /></div></td>
+  </tr>
+  <tr>
+    <td class="caption">この状態で、Shift + Return キーを押すと・・・</td>
+    <td>&nbsp;</td>
+    <td class="caption">主題にぶら下がる２つめのノードが追加されノードラベルの編集状態になります。レイアウトは自動的に行われます。</td>
+  </tr>
+</table>
+<p>マインドマップのノード間のリンクは、デフォルトでは矢印のないリンクですが、矢印や双方向矢印を使うことも出来ます。あらかじめツールバーのドロップダウンボタンで使いたい矢印を選択しておくと、指定した矢印タイプでリンクされます。</p>
+<div class="imgbox"><img src="mindmap.png" /></div>
+<div class="detail"><a href="wink_mindmap.htm" target="_blank">MindMap操作のアニメーションを見る </a></div>
+
+<h2><a name="direct">キーボードによるダイレクト入力機能</a></h2>
+<p>ネットワークビューでノードを追加するには、
+<br /><br />
+ノード形状の選択 ⇒ ネットワークビューをクリック ⇒ 入力ダイアログに文字列を入力
+<br /><br />
+というステップが必要ですが、ダイレクト入力では、ネットワークビュー上でキーボード入力を検知すると即座に入力ダイアログが起動され、ノードを作れます。ノード位置は、最初の1回だけポイントすれば、出現位置をずらしながらノードを配置していきますので、マウスに手を伸ばさずにどんどんノードを作成したい場合に便利な機能です。事前にポイントしていない場合には左上の原点がデフォルトの開始位置になります。</p>
+<div class="detail"><a href="wink_directkey.htm" target="_blank">ダイレクト入力のアニメーションを見る</a></div>
+
+<h3><a name="doubleClick" id="doubleClick">ダブルクリックによるノード作成</a></h3>
+<p>ネットワークビューですばやくノードを追加する方法として上記のダイレクト入力以外、ネットワークビュー上でノードやリンクのない場所をダブルクリックする方法があります。なにもない領域をダブルクリックするとラベル入力のダイアログが出るので、ラベルを入力して確定すれば、ダブルクリックした場所でノードが追加されます。</p>
+
+<h2><a name="cliptext" id="cliptext"></a>クリップボードからの一括ノード作成</h2>
+<p>クリップボードにテキストがコピーされている状態で、ネットワークビュー上でコンテキストメニュー「クリップボードのテキストからノードを作成」を実行すると、テキスト1行につき1つのノードを生成し連続的に貼り付けます。この際、元のテキストが半角／全角スペース、タブ文字、ピリオドでインデントされている場合は、ネットワークビュー上のレイアウトにインデントが反映されます。インデント文字はトリミングされます。</p>
+<p>テキストエディタなどで編集した文書を1行ずつノードに変換したいときやMindManagerやFreeMindのデータをiEditに持ってきたいときに役立ちます。現バージョンではインデントをアウトラインの情報に変換する機能はありません。これは将来のバージョンでサポートする予定です。</p>
+<p>この機能以外に、テキストファイルをインポートする機能もあります。インポート機能ではインデントなどは考慮していません。</p>
+<div class="imgbox"><img src="clip2nodes.png" /></div>
+</body>
+</html>

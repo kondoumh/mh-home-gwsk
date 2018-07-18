@@ -1,0 +1,10 @@
+h1 {font-size: 120%; border-bottom:2pt solid #9999FF; border-left:7pt solid #9999FF; padding: 5px 5px 5px;}
+h2 {font-size: 110%; border-bottom:2pt solid #9999FF; border-left:3pt solid #9999FF; padding: 5px 5px 5px;}
+h3 {font-size: 100%; border-bottom:1pt solid #9999FF; padding: 5px 5px 5px;}
+h4 {font-size: 100%; border-bottom: 1px dashed #999999; padding: 5px 5px 5px;}
+li {font-size: 90%; padding: 0px;}
+table {align: center}
+.imgbox {text-align: center; margin: 30px 0px 15px 0px}
+.imgbox_l {text-align: left; margin: 15px 0px 15px 0px}
+.caption {font-size: 80%; text-align: center;}
+.detail {text-align: right; }

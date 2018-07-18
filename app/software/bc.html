@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="UML エディター Before Coding の説明です">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>kondoumh Before Coding</title>
+
+    <meta name="theme-color" content="#3372DF">
+
+    <!-- Page styles -->
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/components.css">
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="https://kondoumh.com/rss.xml" />
+</head>
+
+<body>
+    <header class="app-bar promote-layer">
+        <div class="app-bar-container">
+            <button class="menu"><img src="../images/hamburger.svg" alt="Menu"></button>
+            <h1 class="logo">kondoumh <strong>Before Coding</strong></h1>
+            <section class="app-bar-actions">
+                <!-- Put App Bar Buttons Here -->
+                <!-- e.g <button><i class="icon icon-star"></i></button> -->
+            </section>
+        </div>
+    </header>
+
+    <nav class="navdrawer-container promote-layer">
+        <h4>Navigation</h4>
+        <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../software/iedit.html">iEdit</a></li>
+            <li><a href="index.html">Software</a></li>
+            <li><a href="../profile.html">Profile</a></li>
+            <li><a href="../history.html">History</a></li>
+            <li><a href="http://blog.kondoumh.com">Blog</a></li>
+            <li><a href="https://reblog.kondoumh.com">Reblog</a></li>
+            <li><a href="https://twitter.com/kondoumh">Tweets</a></li>
+            <li><a href="https://www.youtube.com/user/kondoumh/videos?view=0&flow=grid">Movies</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <h2>概要</h2>
+
+        <p>オブジェクト指向設計で UML が注目されはじめた1998年頃、UML図を書くツールは、Rational Roseのように高価なCASEツールしかありませんでした。Wordの作図機能は使いにくくてストレスが溜まるばかりです。そこで、簡単にクラス図を描きたいという欲求を満たすためBefore Coding(以下BC)を作りました。スケルトンコード生成機能やソースコードの取り込み機能なども付けてみました。</p>
+        <p>しかしその後、Microsoft Visual Studio 6.0 Enterprise EditionにRoseのサブセット版であるVisual Modeler が同梱されたり、Javaで書かれたTogetherJなどの優れたツールが出てきたので開発を停止しました(※)。現在このソフトのメンテナンスはしておりません。</p>
+
+        <div class="txtbox">(※)この文章を書いた当時Together JはBorland傘下にはなく安価なプロダクトだったように記憶しています。その後 TogetherはBorlandのMDAのプラットフォームとして進化を遂げていきました。(2006.04.25追記)</span>
+        </div>
+
+        <h2>動作環境</h2>
+        <p>Windows 95/NT 4.0/2000/XP で動かしたことがあります。</p>
+        <p>本プログラムは、Visual C++ 5.0Jを用いて開発いたしました。</p>
+
+        <h2>機能一覧</h2>
+        <p><img src="../images/bc/bc.gif" alt="bc" /></p>
+
+        <ul>
+            <li>クラスアイコンの作成</li>
+            <li>メンバの属性(public, private, protected)の設定</li>
+            <li>クラスアイコンの表示設定(詳細、簡易、メソッドの表示/非表示、プロパティの表示/非表示)</li>
+            <li>クラス関連の作成(関連、継承、実装、集約、コンポジション、多重度やロールなどの入力も可)</li>
+            <li>クラス図の印刷</li>
+            <li>クラス図、クラスアイコンのクリップボードへのコピー</li>
+            <li>クラスアイコンからC++のヘッダーファイル(.h)と定義ファイル(.cpp)のスケルトンを生成する</li>
+            <li>C++のヘッダーファイル(.h)、Javaのソースファイル(.java)からクラスアイコンを作成する(After Coding??)</li>
+            <li>プロジェクト → クラスグループ → クラス → メソッド・プロパティ という階層による図の管理</li>
+        </ul>
+        <a href="bc.lzh" class="cta--primary">ダウンロード</a>
+
+
+        <h2>最後に...</h2>
+        <p>UMLでは、クラス図(クラスとクラス関連の静的な図)以外にも、ユースケース図、ステートチャート図、アクティビティ図などさまざまな図が用意されており、UMLエディタは共通のリポジトリからこれらの図を生成できるような機能を持つ必要があります。BCではクラス図、それも厳密にはUMLの仕様通りではない図を描く機能しかありません。本当はそのようなツールを目指していたのですが、個人の余暇にやるには少し荷が重いです。やはり、このようなツールは専用のベンダにお任せして、自分のプログラム設計に専念したほうがいいと思いました。最近は私自身UMLやオブジェクト指向設計に対する思い入れが薄れたというのもあります。　そんなわけで、ソフトウェア自体メンテナンスしていないため、残念ながらドキュメントの類はありません。Roseなどを使ったことがある方はなんとなくわかるとは思います。こんな状態で公開したのは、UMLに興味を持っているけど専用ツールがないので手を出していない方への、ほんのイントロぐらいにはなると思ったためです。
+            　用途はまったく異なりますが、BCのGUIは
+            <a href="iedit.html">iEdit</a>に活かされています。</p>
+        <p>2001.11.11 追記</p><span class="strike-through">Before Coding をリファインしようと計画しています。詳しくはiEditの次回予告を参照してください</span></p>
+        <p>2006.04.25 追記</p>
+        <p>Before Codingってマーチン・ファウラー言うところの<a href="http://capsctrl.que.jp/kdmsnr/wiki/bliki/?UmlAsSketch">スケッチ</a>用ツールだったように思います。フォワードスケッチングという意味ですね。既存のコードを可視化する機能も一応ありますし。</p>
+        <p>ホワイトボードもいいですが、プロジェクトルームにプロジェクタとスクリーンが常備されていれば、UMLエディタとかコードエディタでコードとモデルについてスケッチしながらメンバー全員で共有できますよね。</p>
+        <p>このツールを作ってからだいぶ経って、さすがにもう使っていませんが、スケッチに特化したツールっていうのも良いかもしれません。</p>
+
+    </main>
+
+    <footer class="footer">
+        <p>&copy;2012 kondoumh.com</p>
+    </footer>
+    <!-- build:js scripts/main.min.js -->
+    <script src="scripts/main.js"></script>
+    <!-- endbuild -->
+
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+        ga('create', 'UA-5618326-5', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <!-- Built with love using Web Starter Kit -->
+
+</body>
+
+</html>

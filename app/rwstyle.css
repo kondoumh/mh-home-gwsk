@@ -1,0 +1,344 @@
+@charset "utf-8"
+
+body {
+  font-family: 'ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic Pro','メイリオ',Meiryo,'ＭＳ Ｐゴシック',sans-serif;
+}
+
+#header {
+  width: 95%;
+  margin: 0 auto;
+}
+
+#footer {
+  width: 95%;
+  margin: 0 auto;
+}
+
+#container {
+  width: 95%;
+  margin: 0 auto;
+  font-size: 95%;
+}
+
+#container a {
+  color: #6633FF;
+  text-decoration: none;
+}
+
+#container a:link
+{
+  color: #6633FF;
+  text-decoration: none;
+}
+
+#container a:visited
+{
+  color: #6633FF;
+  text-decoration: none;
+}
+
+#container a:hover
+{
+  color: #6633FF;
+  text-decoration: underline;
+}
+
+#main {
+  background: white;
+}
+ 
+#sub {
+  background: white;
+}
+
+#footerNavLink {
+  text-align: left;
+}
+
+#logo {
+  /*float: left;*/
+}
+
+#topiclist-top {
+  font-size: 90%;
+  color: white;
+  background: #483D8B;
+  text-align: left;
+  padding: 1em;
+}
+
+#topiclist-top a {
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+#topiclist-top a:visited
+{
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+#topiclist-top a:hover
+{
+  color: #FFFFFF;
+  text-decoration: underline;
+}
+
+#topiclist-bottom {
+  font-size: 90%;
+  text-align: right;
+}
+
+img {
+  max-width: 100%;
+}
+
+strong
+{
+  color: #CC3333;
+}
+
+h1
+{
+  font-size: 120%;
+  padding: 10px 15px 5px;
+  border-bottom: 1px solid #CCCCCC;
+  background: #F3F3F3;
+  font-weight: normal;
+}
+
+h2
+{
+  font-size: 110%;
+  margin: 0px 0px 10px;
+  color: #333333;
+  padding: 5px 0px 5px;
+  background: #F3F3F3;
+  clear: both;
+}
+
+h3
+{
+  font-size: 100%;
+  margin: 10px 0px 10px 0px;
+  color: #333333;
+  border-bottom:2pt solid #9999FF;
+  border-left:4pt solid #9999FF;
+  padding: 0px 8px 3px;
+  clear: both;
+}
+
+h4
+{
+  font-size: 100%;
+  margin: 15px 0px 5px 0px;
+  color: #333333;
+  padding: 0px 0px 5px;
+  clear: both;
+  border-bottom: 1px dashed #999999;
+}
+
+
+.nav {
+  background: #F3F3F3;
+  font-size: 90%;
+  padding: 5px;
+}
+
+.nav a:link {
+  color: #333333;
+  text-decoration: none;
+}
+
+.nav a:visited {
+  color: #333333;
+  text-decoration: none;
+}
+
+.table-of-contents
+{
+  margin: 0px 0px 10px;
+  padding: 1em;
+  background: #F3F3F3;
+}
+
+.nav a:hover {
+  color: #000000;
+  text-decoration: none;
+  background: #FFDEAD;
+}
+
+.imgbox-left {
+  text-align:center;
+  font-size: 75%;
+}
+
+.imgbox-left img
+{
+  border: 0px solid #666666;
+  text-decoration: none;
+}
+
+.imgbox-right
+{
+  text-align:center;
+  font-size: 75%;
+}
+
+.imgbox-right img
+{
+  border: 0px solid #666666;
+  text-decoration: none;
+}
+
+.link-menu {
+  font-size: 90%;
+  color: #808080;
+  background: #F3F3F3;
+}
+
+.slide {
+  display: none;
+}
+
+.contents-list {
+  margin-left: 2em;
+  list-style-type: disc;
+}
+
+
+strong
+{
+	color: #CC3333;
+}
+
+span.strike-through
+{
+	text-decoration:line-through;
+}
+
+#copyright {
+  color: #808080;
+  text-align: center;
+  font-size: 90%;
+}
+
+/* phones */
+#logo {
+  display: none;
+}
+
+#headerNav {
+  display: none;
+}
+
+#headerNav ul {
+  list-style: none;
+  overflow: hidden;
+}
+
+#headerNav li {
+  float: left;
+  width: 10%;
+  text-align: center;
+}
+
+/* fablets/tablets */
+@media all and (min-width: 600px) {
+  #logo {
+    display: block;
+  }
+  #footerNavLink {
+    display: none;
+  }
+  #headerNav {
+    display: block;
+  }
+
+  #footerNav {
+    display: none;
+  }
+
+  .slide {
+    display: block;
+  }
+  .imgbox-left {
+    margin: 10px;
+    float: left;
+  }
+
+  .imgbox-right
+  {
+    margin: 10px;
+    float: right;
+  }
+
+  .download-link ul {
+    list-style: none;
+    overflow: hidden;
+  }
+  
+  .download-link li {
+    float: left;
+    width: 25%;
+    text-align: center;
+  }
+  
+}
+
+/* pc */
+@media all and (min-width: 768px) {
+
+  #header {
+    width: 80%;
+    overflow: hidden;
+  }
+
+  #footer {
+    width: 80%;
+    overflow: hidden;
+  }
+
+  #container {
+    width: 80%;
+    overflow: hidden;
+  }
+  #main {
+    float: left;
+    width: 78.0612245%;
+  }
+ 
+  #sub {
+    float: right;
+    width:20.4081633%; /* 200px / 980px * 100 */
+  }
+
+  .link-menu ul {
+    list-style: none;
+    overflow: hidden;
+  }
+
+  .link-menu li {
+    float: left;
+    width: 20%;
+    text-align: center;
+  }
+}
+
+/* pc */
+@media all and (min-width: 1024px) {
+  #header {
+    width: 65%;
+    overflow: hidden;
+  }
+
+  #footer {
+    width: 65%;
+    overflow: hidden;
+  }
+
+  #container {
+    width: 65%;
+    overflow: hidden;
+  }
+}

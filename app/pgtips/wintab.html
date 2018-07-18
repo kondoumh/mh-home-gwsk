@@ -1,0 +1,636 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<META name="GENERATOR" content="IBM HomePage Builder 2001 V5.0.3 for Windows">
+<title>Kondoh MH HOME PAGE PG tips - WinTab</title>
+<link href="../mh.css" rel="stylesheet" type="text/css">
+<link rel="shortcut icon" href="../favicon.ico">
+</head>
+<body bgcolor=#ffffff>
+
+<h1> タブレットからペンの入力を受信する(WinTab プログラミング) </h1> 
+
+<hr>
+
+<p>　タブレットとスタイラスペンを使うと、パソコンに手書きの線を入力できます。筆圧を入力することができるので毛筆のような表現も可能です。ペンの傾きを入力できる機種もあり、アイデア次第で面白いことに使えそうです。
+
+<p>　私は昔(94年頃)、<a href=http://tablet.wacom.co.jp>WACOM</a>のタブレットを用いたプログラム開発をしたことがあります。当初A3版ほどの大きさのUDというタブレットを使っていて、その後 ArtPad という小さいサイズのものに移行しました。いずれもシリアルポートに接続するようになっていました。当時はWACOMコマンドという簡単な制御用コマンドを直接シリアルポートに書き込み、タブレットからの応答をシリアルポートから読み取って解析するというプログラムを書いていました。OSはMS-DOSでWACOMから出ているパケットの資料に基づきデータを取得してました。Windows 3.1/95に移行してからも、Windows APIでシリアルポートを読み書きしてました。</p>
+
+<p>　余談ですが、その後、お子様向けのタブレットであるWACOMプレピオを入手しました。ArtPadと比べて１万円ほど安く、PS2ポートから電源を取るのでACアダプタ不要というのが魅力でした(その分、データの分解能は低く抑えられています)。KidPicsというお絵かきソフトまでバンドルされてました。最近のFAVOなどはもちろんUSB接続で、AC電源も不要です。</p>
+
+<p>　現在ではシリアルポート、USBの接続方式の違いはドライバが吸収してくれて、WinTabというAPIセットを利用してペンデータを取得できます。WinTab APIを利用するためのSDKが、WinTabの開発元である<a href = "http://www.pointing.com">LCS/Telegraphics</a>から提供されていますので、タブレット対応アプリケーションを作成することができます。</p>
+
+<h4>SDKの入手</h4>
+<p>　LCS/TelegraphicsのサイトからWinTabのSDKを入手します。ダウンロードページは、</p>
+<p><a href=http://www.pointing.com/FTP.HTM>http://www.pointing.com/FTP.HTM</a></p>
+です。WTKIT126.ZIP が、SDKのバイナリです。ヘッダファイルやLIBファイル、サンプルファイルがアーカイブされています。サンプルをビルドするのが面倒な場合は、コンパイル済みのファイルが
+WT32X126.ZIP で用意されています。他にWord形式のドキュメント(英文)もあります。WinTab
+APIを提供するWinTab.dllはタブレットドライバをインストールすると自動的にインストールされます。
+<h4>WinTabを利用するVisual C++ プロジェクトの設定方法</h4>
+<p>　WTK126.ZIPを適当なディレクトリに展開します。サンプルプログラム、ヘッダファイル、ライブラリファイルのディレクトリができます。Visual Studio のオプション設定でincludeパスとlibパスを指定します。図は E:\wacom というディレクトリにWTK126.ZIPを展開した場合の例です。<br>
+　サンプルプログラムのディレクトリに必ず含まれている <b>Pktdef.h もincludeディレクトリにコピーしておくと便利</b>です</p>
+
+<DIV align="center">
+<table align=center cellPadding=3>
+  
+    <tr>
+      <td><img src=wintab/include.gif></td>
+      <td><img src=wintab/lib.gif></td>
+    </tr>
+    <tr>
+      <td align=center><b>includeパス設定</b></td>
+      <td align=center><b>libパス設定</b></td>
+    </tr>
+  
+</table>
+</DIV>
+また、プロジェクトの設定で、libディレクトリ内のWintab32.lib
+と Wntab32x.lib を指定します。
+<p align=center><img src=wintab/link.gif><br>
+<b>リンクファイル指定</b>
+</p>
+
+<h4>WinTab対応MFCアプリケーションを作ってみる</h4>
+
+<p>　SDKに含まれるサンプルプログラムはすべてC言語でWindowsのメッセージを処理するコールバックルーチンで書かれています。サンプルのPrsTestあたりを参考にWinTab対応MFCアプリケーションを作ってみます。まず、AppWizardでDocument-Viewサポート付のMFCアプリケーションを生成します(別にDocument-Viewでなくてもいいのですが、Documentにペンデータを格納するようにすればお絵かきソフトなどが作れそうです)。CView派生クラスのヘッダファイルの先頭に以下のようにmsgpack.h wintab.h pktdef.hをインクルードし、３つのdefine文を記述します。</p>
+<DIV align="center">
+<table align=center border=1 width="70%">
+  <TBODY>
+    <TR>
+      <td>
+      <pre>
+#include &lt;msgpack.h&gt;
+#include &lt;wintab.h&gt;
+#define PACKETDATA	(PK_CURSOR | PK_X | PK_Y | PK_BUTTONS | PK_NORMAL_PRESSURE | PK_ORIENTATION)
+#define PACKETMODE	PK_BUTTONS
+#define NPACKETQSIZE 32
+#include &lt;pktdef.h&gt;
+</pre>
+      </td>
+    </TR>
+  </TBODY>
+</table>
+</DIV>
+<p>
+<font color=#ff0000>○WTメッセージによるデータ取得</font></p>
+
+<p>　タブレットドライバからのデータは独自のWindowメッセージであるWT_PACKETメッセージとして受け取ることができます。WT_PACKETを受け取るには、メッセージを受信したいWindowのハンドルをWTOpen というWinTab API関数に渡す必要があります。CView派生クラスで処理したい場合は、CViewのパブリックメンバ変数 m_hWndを使用すればOKです。WTOpenではLOGCONTEXT構造体に値を設定してモードや解像度の設定を行います。WTInfo API 関数を用いてLOGCONTEXTのデフォルト値を取得し、必要な項目だけを設定するようなコーディングをします。次のような初期化用ヘルパー関数を用意し、タブレット受信の開始イベントハンドラで呼ぶようにします。WTOpenはHTCX構造体を返します。このヘルパー関数ではWTOpenの返り値をそのままreturnしています。</p>
+<DIV align="center">
+<table align=center border=1 width="70%">
+  <TBODY>
+    <TR>
+      <td>
+      <pre>HCTX TestView::TabletInit()
+{
+  LOGCONTEXT lcMine;
+  
+  /* WTInfoを使用してデフォルト設定値を取得 */
+  WTInfo(WTI_DEFCONTEXT, 0, &amp;lcMine);
+  
+  /* 必要な項目を設定 */
+  wsprintf(lcMine.lcName, &quot;WinTab test %x&quot;, AfxGetApp()-&gt;m_hInstance);
+  lcMine.lcOptions |= CXO_MESSAGES;  // WTメッセージが渡されるようにする
+  lcMine.lcPktData = PACKETDATA;
+  lcMine.lcPktMode = PACKETMODE;
+  lcMine.lcMoveMask = PACKETDATA;
+  lcMine.lcBtnUpMask = lcMine.lcBtnDnMask;
+  /* タブレットの解像度設定 
+    タブレットドライバのスケーリング設定に関係なくタブレットの分解能そのものを取り込む
+    デフォルト設定値はドライバで設定されているスケーリングになっている
+  */
+  lcMine.lcOutOrgX = lcMine.lcOutOrgY = 0;
+  lcMine.lcOutExtX = lcMine.lcInExtX;
+  lcMine.lcOutExtY = lcMine.lcInExtY;
+  
+  /* メンバ変数 m_tabletSizeにタブレットサイズを格納しておく */
+  m_tabletSize = CSize(lcMine.lcOutExtX, lcMine.lcOutExtY);
+  
+  /* パケット受信開始 */
+  return WTOpen(m_hWnd, &amp;lcMine, TRUE);
+}</pre>
+      </td>
+    </TR>
+  </TBODY>
+</table>
+</DIV>
+<p>　TabletInitの呼び出し側では、HTCX構造体をメンバ変数に格納して保持します。次の例ではOnReceiveDataFromTabletというコマンドハンドラの処理です。メニューにチェックが入っている場合はタブレットからのデータを受信し、m_bDigitizingという状態管理用のBOOL値をTestViewのメンバに用意しています。チェックが外されるとWTCloseを呼び出してタブレットコンテキストを解放します。</p>
+<DIV align="center">
+<table align=center border=1 width="70%">
+  <TBODY>
+    <TR>
+      <td>
+      <pre>void TestView::OnReceiveDataFromTablet() 
+{
+  // TODO: この位置にコマンド ハンドラ用のコードを追加してください
+  m_bDigitizing = !m_bDigitizing;
+  if (m_bDigitizing) {
+    m_hTab = TabletInit(); // TestViewで定義されているHTCX型のメンバ変数
+    if (!m_hTab) {
+      MessageBox(&quot;Could Not Open Tablet Context&quot;);
+    }
+  } else {
+    if (m_hTab) WTClose(m_hTab);
+  }
+}
+
+void TestView::OnUpdateReceiveDataFromTablet(CCmdUI* pCmdUI) 
+{
+  // TODO: この位置に command update UI ハンドラ用のコードを追加してください
+  pCmdUI-&gt;SetCheck(m_bDigitizing);
+}</pre>
+      </td>
+    </TR>
+  </TBODY>
+</table>
+</DIV>
+<p>　タブレットドライバからのデータはWT_PACKETメッセージとして入ってきますので、これを捕まえるハンドラを書く必要があります。Windowメッセージを処理するプロシージャを書くのですが、CViewでは、WindowProcメソッドを定義することで、Windowsメッセージ全般を捕まえることができます。Class WizardでTestViewにWindowProc関数を追加します。後は、Cのコールバックルーチンと同様に処理を書けます。<br>
+　TestViewに下のようにメンバ変数を用意しておきます。</p>
+<DIV align="center">
+<table align=center>
+  
+    <tr>
+      <td>PACKET m_pkt;</td>
+      <td>// パケットそのものを格納する</td>
+    </tr>
+    <tr>
+      <td>CPoint m_pt;</td>
+      <td>// ペンの座標値格納用</td>
+    </tr>
+    <tr>
+      <td>int m_prs;</td>
+      <td>// 筆圧データ格納用</td>
+    </tr>
+    <tr>
+      <td>int m_orAzimuth;</td>
+      <td>// 垂直(Z軸)からみた傾きの方向(0～359度)</td>
+    </tr>
+    <tr>
+      <td>int m_orAltitude;</td>
+      <td>// X-Y平面に対する傾き角(90～0度)</td>
+    </tr>
+    <tr>
+      <td>int m_orTwist;</td>
+      <td>// 回転角(サポートしていない？)</td>
+    </tr>
+  
+</table>
+</DIV>
+<p>　WindowProcイベントハンドラではWinTab APIであるWTPacketを用いてパケットを取り出しメンバ変数に値を格納します。下の例では、タブレットのスケールに変換した値をm_ptに格納する処理を書いています。最後にCView::WindowProc(message, wParam, lParam)をreturnするのを忘れないようにする必要があります。</p>
+<DIV align="center">
+<table align=center border=1 width="70%">
+  <TBODY>
+    <TR>
+      <td>
+      <pre>LRESULT TestView::WindowProc(UINT message, WPARAM wParam, LPARAM lParam) 
+{
+  // TODO: この位置に固有の処理を追加するか、または基本クラスを呼び出してください
+  if (message == WT_PACKET) {
+    if (WTPacket((HCTX)lParam, wParam, &amp;m_pkt)) {
+      m_pt.x = MulDiv((UINT)m_pkt.pkX, m_rcClient.right, m_tabletSize.cx);
+      m_pt.y = MulDiv((UINT)m_pkt.pkY, m_rcClient.bottom, m_tabletSize.cy);
+      m_prs = m_pkt.pkNormalPressure;
+      m_orAzimuth = m_pkt.pkOrientation.orAzimuth/10;
+      m_orAltitude = m_pkt.pkOrientation.orAltitude/10;
+      m_orTwist = m_pkt.pkOrientation.orTwist;
+      Invalidate(); // 再描画
+    }
+  }
+  return CView::WindowProc(message, wParam, lParam);
+}</pre>
+      </td>
+    </TR>
+  </TBODY>
+</table>
+</DIV>
+<p>
+　このテストアプリケーションでは、WT_PACKETメッセージを処理するたびに画面を再描画して、座標値、筆圧値、垂直方向の傾きとX-Y平面に対する傾き角をViewの左上に表示し、小さな円を座標値の位置に描画するようにしてみました。ArtPadやプレピオでは傾きのデータは不定な値が表示されます。</p>
+<DIV align="center">
+<table align=center border=1 width="70%">
+  <TBODY>
+    <TR>
+      <td>
+      <pre>void TestView::OnDraw(CDC* pDC)
+{
+  TestDoc* pDoc = GetDocument();
+  ASSERT_VALID(pDoc);
+  // TODO: この場所にネイティブ データ用の描画コードを追加します。
+  
+  if (m_bDigitizing) {
+    CPoint ptHere;
+    ptHere.x = m_pt.x;
+    // タブレットの原点は左下に設定されているので、GDI系に合わせて変換する
+    ptHere.y = m_rcClient.bottom - m_pt.y;
+    
+    pDC-&gt;TextOut(0, 0, m_outText);
+    m_outText.Format(&quot;%d %d %d *** %d %d&quot;, m_pkt.pkX, m_pkt.pkY, m_prs, m_orAzimuth, m_orAltitude);
+    
+    // 筆圧0付近はノイズが多いので30程度はカットする
+    if (m_prs &lt; 30) return;
+    int r = 2 // 半径は2に固定(筆圧データを反映させると視覚的に筆圧が確認できる)
+    pDC-&gt;Ellipse(ptHere.x - r, ptHere.y - r, ptHere.x + r, ptHere.y + r);
+  }
+}</pre>
+      </td>
+    </TR>
+  </TBODY>
+</table>
+</DIV>
+<p align=center><img src=wintab/exe.jpg><br>
+<b>アプリケーションの実行例</b>
+</p>
+
+<br>
+<br>
+
+<p><font color=#ff0000>○マウスモードによるデータ取得</font><p>
+
+<p>　タブレットドライバはマウスドライバとしても動作しており、タブレットからのデータをマウスイベント経由で取得することも可能です。WT_PACKETメッセージで取得する方式との違いは、
+<ul>
+<li>マウスイベントの発生時にドライバのキューにたまったデータを全て取り出す必要がある。
+<li>マウスカーソルがペンの動きに追従する。マウスイベント受信エリアの外側にカーソルが移動したときは、通常のマウス機能になり、ウィンドウのメニューやボタンの操作が出来る
+</ul>
+といったところです。目的に応じて使い分けるとよいと思います。
+<p>　マウスイベントによって入ってきたデータを元に線を描画する処理を書いてみます。まず、受信開始のイベントハンドラで呼び出す初期化用ヘルパー関数です。Viewのメンバー変数にパケットを蓄積するバッファや座標格納用のメンバ変数を次のように定義しておきます。</p>
+<DIV align="center">
+<table align=center>
+  
+    <tr>
+      <td>PACKET m_localPacketBuf[NPACKETQSIZE];</td>
+      <td>// パケット格納用バッファ</td>
+    </tr>
+    <tr>
+      <td>CPoint m_ptNew;</td>
+      <td>// ペンの座標値格納用</td>
+    </tr>
+    <tr>
+      <td>int m_prsNew;</td>
+      <td>// 筆圧値格納用</td>
+    </tr>
+    <tr>
+      <td>int m_ptOld;</td>
+      <td>// 直前の座標値格納用</td>
+    </tr>
+    <tr>
+      <td>int m_prsOld;</td>
+      <td>// 直前の筆圧値格納用</td>
+    </tr>
+  
+</table>
+</DIV>
+<p align=center></p>
+<DIV align="center">
+<table align=center border=1 width="70%">
+  <TBODY>
+    <TR>
+      <td>
+      <pre>HCTX TestView::TabletInit2()
+{
+  LOGCONTEXT lcMine;
+  HCTX hResult;
+  
+  /* デフォルト設定の取得. */
+  WTInfo(WTI_DEFSYSCTX, 0, &amp;lcMine);
+  
+  /* 設定値の修正 */
+  wsprintf(lcMine.lcName, &quot;WinTab test %x&quot;, AfxGetApp()-&gt;m_hInstance);
+  lcMine.lcPktData = PACKETDATA;
+  lcMine.lcPktMode = PACKETMODE;
+  lcMine.lcMoveMask = PACKETDATA;
+  lcMine.lcBtnUpMask = lcMine.lcBtnDnMask;
+  
+  /* マウスモード用の設定. */
+  lcMine.lcOutOrgX = 0;
+  lcMine.lcOutExtX = GetSystemMetrics(SM_CXSCREEN);
+  lcMine.lcOutOrgY = 0;
+  lcMine.lcOutExtY = -GetSystemMetrics(SM_CYSCREEN);
+  
+  /* パケット受信開始 */
+  hResult = WTOpen(m_hWnd, &amp;lcMine, TRUE);
+  
+  /* 受信バッファの設定(本来は「バッファあふれのエラー処理が必要」だそうです) */
+  WTQueueSizeSet(hResult, NPACKETQSIZE);
+  return hResult;
+}</pre>
+      </td>
+    </TR>
+  </TBODY>
+</table>
+</DIV>
+<p>　マウスイベントから呼び出すデータ取得用ヘルパー関数を用意します。m_localPacketBufにたまったデータをforループで取り出し、直前のデータと取り出したデータを格納して再描画処理を実行します。</p>
+<CENTER>
+<table align=center border=1 width="70%">
+  <TBODY>
+    <TR>
+      <td>
+      <pre>void TestView::dropPoint()
+{
+  int nPackets;
+  
+  WTOverlap(m_hTab, TRUE);
+  
+  if (nPackets = WTPacketsGet(m_hTab, NPACKETQSIZE, &amp;m_localPacketBuf)) {
+    for (int i = 0; i &lt; nPackets; i++) {
+      // 前回のデータ保持
+      m_ptOld = m_ptNew;
+      m_prsOld = m_prsNew;
+      // 新しいパケットの保持
+      m_ptNew.x = (UINT)m_localPacketBuf[i].pkX;
+      m_ptNew.y = (UINT)m_localPacketBuf[i].pkY;
+      // クライアント座標への変換
+      m_ptNew.x -= m_ptOrg.x;
+      m_ptNew.y -= m_ptOrg.y;
+      m_prsNew = (UINT)m_localPacketBuf[i].pkNormalPressure;
+      point p; p.x = m_ptNew.x; p.y = m_ptNew.y; p.z = m_prsNew;
+      Invalidate();
+    }
+  }
+}</pre>
+      </td>
+    </TR>
+  </TBODY>
+</table>
+</CENTER>
+<p>　MouseMoveイベントハンドラをClass Wizardによって追加し、その中でヘルパー関数を呼び出すようにします。</p>
+<CENTER>
+<table align=center border=1 width="70%">
+  <TBODY>
+    <TR>
+      <td>
+      <pre>void TestView::OnMouseMove(UINT nFlags, CPoint point) 
+{
+  // TODO: この位置にメッセージ ハンドラ用のコードを追加するかまたはデフォルトの処理を呼び出してください
+  if (m_bPoling) dropPoint();
+  CView::OnMouseMove(nFlags, point);
+}</pre>
+      </td>
+    </TR>
+  </TBODY>
+</table>
+</CENTER>
+<p>　描画のメソッドでは、OldとNew２つの座標の間に線を引きます。</p>
+<CENTER>
+<table align=center border=1 width="70%">
+  <TBODY>
+    <TR>
+      <td>
+      <pre>
+void SignView::OnDraw(CDC* pDC)
+{
+  if (m_prsNew > 20) {
+    pDC->MoveTo(m_ptOld); pDC->LineTo(m_ptNew);
+  }
+}
+</pre>
+      </td>
+    </TR>
+  </TBODY>
+</table>
+</CENTER>
+<p>　マウスモードのアプリケーション実行例を示します。ペンの動きに合わせて、システムカーソル(マウスカーソル)も動き、軌跡が残ります。</p>
+
+<p align=center><img src=wintab/exe2.jpg><br>
+<b>アプリケーションの実行例(システムカーソルも表示される)</b>
+</p>
+
+
+<h4>ActiveX Control化に挑戦</h4>
+<p>　次にActiveX Control化 をやってみます。Visual Basic などのフォームに貼り付けると、タブレットデータ受信のイベントをハンドリングでき、受信したデータに基づき描画コマンドなどを実行できるという感じで作ると便利そうです。<br>
+　ActiveX Control用プロジェクトをAppWizardで生成します。実は私はActiveX
+Controlを作った経験がないのですが、適当にやってみます。　AppWizardでMFC
+ActiveX Controll Wizardを選んで適当なプロジェクト(ここではtestという名前にします)を作ります。とりあえず、すべてデフォルト設定のままでいいでしょう。ビルドするとControlをシステムへ登録するコマンドまで実行してくれます。</p>
+
+<p align=center>
+<img src=wintab/wiz0.gif><b><BR>
+MFC ActiveX Controlの作成</b></p>
+
+<p>　まず、MFCアプリケーションの要領でWT_PACKETメッセージを処理できるようにしてしまいます。まず、CTestCtrlというクラスが生成されていますのでこのヘッダーファイルの先頭にinclude文とdefine文を追加します。
+
+</p>
+<CENTER>
+<table align=center border=1 width="70%">
+  <TBODY>
+    <TR>
+      <td>
+      <pre>#include &lt;msgpack.h&gt;
+#include &lt;wintab.h&gt;
+#define PACKETDATA      (PK_CURSOR | PK_X | PK_Y | PK_BUTTONS | PK_NORMAL_PRESSURE | PK_ORIENTATION)
+#define PACKETMODE      PK_BUTTONS
+#define NPACKETQSIZE 32
+#include &lt;pktdef.h&gt;
+
+/////////////////////////////////////////////////////////////////////////////
+// CTestCtrl : このクラスの動作の定義に関しては TestCtl.cpp を参照してください
+
+class CTestCtrl : public COleControl
+{
+  DECLARE_DYNCREATE(CTestCtrl)</pre>
+      </td>
+    </TR>
+  </TBODY>
+</table>
+</CENTER>
+<p>　次に ActiveX Control が提供するイベントを定義します。ClassViewでDTestEventというインターフェイスを右クリックして、「イベントの追加」を選択します。イベント名とパラメータは図のように指定します。<br>
+　DTestEventインターフェイスの下にtabletPacket()というイベントが追加され、CTestCtrl に FireTabletPacket() というメソッドが追加されます(この部分は編集不可です)。<br>
+　FireTabletPacketがActiveX Controlから呼ばれると、ActiveX ContolのコンテナにtabletPacket()イベントが発生する仕組みになっているみたいです。 ということは、ActiveX Control にWT_PACKETメッセージを処理するイベントハンドラを書き、その時の座標値、筆圧値をFireTabletPacket()の引数に渡してやればよさそうです。
+</p>
+<CENTER>
+<table align=center cellPadding=6>
+  
+    <tr>
+      <td><img src=wintab/addEvent0.gif></td>
+      <td><img src=wintab/addEvent.gif></td>
+    </tr>
+    <tr>
+      <td align=center><b>Class Viewで追加</b></td>
+      <td align=center><b>イベント名、パラメータの設定</b></td>
+    </tr>
+  
+</table>
+</CENTER>
+<p>　MFCアプリと同様に、WindowProcイベントハンドラをClassWizardで追加して、パケットを取り出したら即座にFireTabletPcketに座標値、筆圧値を渡して呼び出します。筆圧値を保持して、再描画に利用します。
+</p>
+<CENTER>
+<table align=center border=1 width="70%">
+  <TBODY>
+    <TR>
+      <td>
+      <pre>LRESULT CTestCtrl::WindowProc(UINT message, WPARAM wParam, LPARAM lParam) 
+{
+  // TODO: この位置に固有の処理を追加するか、または基本クラスを呼び出してください
+  if (message == WT_PACKET) {
+    PACKET pkt;
+    if (WTPacket((HCTX)lParam, wParam, &amp;pkt)) {
+      short x = (short)pkt.pkX;
+      short y = (short)pkt.pkY;
+      short p = (short)pkt.pkNormalPressure;
+      FireTabletPacket(x, y, p);
+      m_prs = p; // Controlの描画処理のために筆圧データを保持
+      Invalidate(); // Controlの再描画
+    }
+  }
+  return COleControl::WindowProc(message, wParam, lParam);
+}</pre>
+      </td>
+    </TR>
+  </TBODY>
+</table>
+</CENTER>
+<p>　Controlの再描画処理では、筆圧データによってControlの表示色のグラデーションを変えるようにしました(ここでは筆圧データが256階調というのを利用していますが、最新のドライバでは筆圧の諧調が1024になっているようなので調整が必要です)。
+</p>
+<CENTER>
+<table align=center border=1 width="70%">
+  <TBODY>
+    <TR>
+      <td>
+      <pre>void CTestCtrl::OnDraw(CDC* pdc, const CRect&amp; rcBounds, const CRect&amp; rcInvalid)
+{
+  // TODO: 以下のコードを描画用のコードに置き換えてください
+  CBrush* brsOld;
+  COLORREF fill = RGB(255-m_prs, 255-m_prs, 255-m_prs);
+  CBrush brs(fill);
+  brsOld = pdc-&gt;SelectObject(&amp;brs);
+  pdc-&gt;FillRect(rcBounds, &amp;brs);
+  pdc-&gt;SelectObject(brsOld);
+}</pre>
+      </td>
+    </TR>
+  </TBODY>
+</table>
+</CENTER>
+<p>　ところで、パケットの受信開始は、Controlがクリックされたら開始するようにしました。受信用の初期化関数であるTabletInit()は上のMFCアプリケーションと同様です。WindowハンドルはActive X Controlのハンドルをそのまま渡しています。
+<CENTER>
+<table align=center border=1 width="70%">
+  <TBODY>
+    <TR>
+      <td>
+      <pre>void CTestCtrl::OnLButtonDown(UINT nFlags, CPoint point) 
+{
+  // TODO: この位置にメッセージ ハンドラ用のコードを追加するかまたはデフォルトの処理を呼び出してください
+  m_hTab = TabletInit();
+  COleControl::OnLButtonDown(nFlags, point);
+}
+</pre>
+      </td>
+    </TR>
+  </TBODY>
+</table>
+</CENTER>
+<p>開始処理や終了処理は、本来であればコントロールのプロパティとして定義した方がいいと思います。そうすれば、</p>
+<pre>
+test.start = True;
+test.start = False
+</pre>
+
+<p>のようにプログラムの中で制御が可能です。</p>
+
+<p>　では、このActive X Controlを利用するアプリケーションをVisual Basicで作ってみます。まず、Visual Basicの新規作成で「標準的 EXE」を選びプロジェクトを作成します。<br>
+　先に作成したActive X Control を使用できるようにツールボックスの設定をします(下図参照)。
+</p>
+<CENTER>
+<table align=center cellPadding=3>
+  
+    <tr>
+      <td><img src=wintab/vbadd.jpg></td>
+      <td><img src=wintab/vbcompo.jpg></td>
+      <td><img src=wintab/vbtool.jpg></td>
+    </tr>
+    <tr>
+      <td align=center><b>ツールボックスでコンポーネント追加</b></td>
+      <td align=center><b>Controlを選択</b></td>
+      <td align=center><b>Controlが利用可能に...</b>
+    </tr>
+  
+</table>
+</CENTER>
+<p>　Formに３つのLabelを貼り付けます。そしてTest Controlを貼り付けダブルクリックすると下のようにイベントハンドラができますので、LabelのCaptionに座標値と筆圧値を表示させるようにします。
+</p>
+<CENTER>
+<table align=center border=1 width="70%">
+  <TBODY>
+    <TR>
+      <td>
+      <pre>
+
+Private Sub Test1_tabletPacket(ByVal x As Integer, ByVal y As Integer, ByVal p As Integer)
+  Label1.Caption = x
+  Label2.Caption = y
+  Label3.Caption = p
+End Sub
+</pre>
+      </td>
+    </TR>
+  </TBODY>
+</table>
+</CENTER>
+<p>　このプログラムを実行しControl部分をクリックするとタブレットデータの受信が開始され、ラベルに座標値や筆圧値が表示されます。また筆圧に応じてControlのグラデーションが変化します。</p>
+
+<p align=center><img src=wintab/vbsamp.jpg><br>
+<b>VBのフォームでの利用例</b>
+</p>
+
+<h4>その他．．．</h4>
+<p>
+　ここに示した例以外にも、スタイラスペンのボタンが押されたときの処理などを行うことも可能です。詳しくはドキュメントやサンプルプログラムを検討していただきたいと思います。</p>
+
+<p>　ここまで書いて、サンプルプログラムにMFC_DEMOというDoc-Viewアプリがあるのに気付きました。このプログラムではWindowProcメソッドを使わずにメッセージマップを作成してOnWTPacketメッセージハンドラを作っています。こちらの書き方が標準的ですよね。</p>
+<CENTER>
+<table align=center border=1 width="70%">
+  <TBODY>
+    <TR>
+      <td>
+      <pre>  // View のヘッダファイルでのプロトタイプ宣言
+  afx_msg LRESULT OnWTPacket(WPARAM, LPARAM);
+    ・
+    ・</pre>
+      </td>
+    </TR>
+  </TBODY>
+</table>
+</CENTER>
+<CENTER>
+<table align=center border=1 width="70%">
+  <TBODY>
+    <TR>
+      <td>
+      <pre>    ・
+    ・
+// View の実装ファイルでのメッセージマップの指定
+BEGIN_MESSAGE_MAP(CMFC_DEMOView, CView)
+  <b>ON_MESSAGE(WT_PACKET, OnWTPacket)</b>
+  //{{AFX_MSG_MAP(CMFC_DEMOView)
+  ON_WM_CREATE()
+  //}}AFX_MSG_MAP
+END_MESSAGE_MAP()
+    ・
+    ・
+// OnWTPacketイベントハンドラ
+LRESULT CMFC_DEMOView::OnWTPacket(WPARAM wSerial, LPARAM hCtx)
+{
+  // Read the packet
+  PACKET pkt;
+  WTPacket( (HCTX)hCtx, wSerial, &amp;pkt );
+    ・
+    ・</pre>
+      </td>
+    </TR>
+  </TBODY>
+</table>
+</CENTER>
+<h4>WinTab関連情報</h4>
+<p>　WinTabをJavaから利用可能な<a href=http://www.csl.sony.co.jp/person/rekimoto/java/jwintab/>JWinTab</a>というライブラリがありました。JNI経由でWinTabにアクセスしています。タブレット対応のJava アプリケーションを組めます。<br>
+　<a href=http://www.cic.com>iSign</a>という面白いプロダクトがあります。これは、タブレットやPDAからサインを入力しサーバ側で認証するものです。アメリカではすでに電子的なサイン(暗号技術によるデジタル署名ではない)を公式な署名と認める法案が通っているそうです。欧米にはもともとサインの文化があるので自然な流れなのでしょう。サインの認証方式にはまだデファクトスタンダードと呼べる技術がないので要素技術の規定まではしていないそうです。iSignのようにオンラインサインの製品が出揃ってくれば、標準的な規格なども作られていくものと思われます。</p>
+
+
+<p>　最後になりましたが、この文章の内容に関してWACOMに問い合わせたりすることはしないで下さいね。m(__)m
+</p>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-5618326-1");
+pageTracker._trackPageview();
+</script>
+</body>
+</html>

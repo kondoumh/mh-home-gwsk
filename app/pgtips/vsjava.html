@@ -1,0 +1,158 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<META name="GENERATOR" content="IBM HomePage Builder 2001 V5.0.3 for Windows">
+<title>Kondoh MH HOME PAGE PG tips - JDK on Visual Studio</title>
+<link href="../mh.css" rel="stylesheet" type="text/css">
+<link rel="shortcut icon" href="../favicon.ico">
+</head>
+
+<body bgcolor=#ffffff>
+
+<h1>Visual Studio でJDKを使用する </h1> 
+
+<hr>
+<p>
+　ある日、会社で隣の席の後輩がJDKとメモ帳(！)とDOS窓でJavaのプログラムを書いていました。しばらくして画面を覗くと、あまりに不便だったのかViual Studioをエディタ代わりに使っています。そういえば、Visual Studioにはツールをメニューに登録する機能があったなと思いって試してみると、ツールの登録が可能なのはもちろん、登録したツールからの標準出力をVisual Studioのアウトプットウィンドウに出力する機能までありました。これなら、javacの吐き出すエラーメッセージをアウトプットウィンドウに出力して、エラー行にジャンプさせることも出来そうです。</p>
+
+<p>Javaのエラー出力の形式は、</p>
+
+<table border="1">
+  <TBODY>
+    <TR>
+      <td>abc.java:行番号: "エラーメッセージ"</td>
+    </TR>
+  </TBODY>
+</table>
+
+<p>という形式です。これを</p>
+
+<table border="1">
+  <TBODY>
+    <TR>
+      <td>abc.java(行番号) : "エラーメッセージ"</td>
+    </TR>
+  </TBODY>
+</table>
+
+<p>に変換するプログラムをかませば、Visual Studioのエラー行ジャンプが使えます。</p>
+<p>Javaのエラーはデフォルトでは標準エラー出力に吐き出されるため、変換プログラムに渡すには標準出力にエラーを吐き出させる必要があります。Windows NTの場合はDOS窓に</p>
+
+<p>javac abc.java 2> err.txt</p>
+
+<p>と打ち込むことで、err.txtにリダイレクトできます。Windows 98にはこの機能がないので、標準エラー出力を標準出力にリダイレクトしてくれるツールが必要です。javacのオプションでエラー出力を標準出力に出すように指定できるらしいのですが私の環境ではダメでした。</p>
+<p><a href=http://www.hyuki.com/>結城 浩さん</a>が<a href=http://www.st.rim.or.jp/~hyuki/simtool.htm target="_top">http://www.st.rim.or.jp/~hyuki/simtool.htm</a>にeoutというツールをソースコード付きで公開されています。これを使うと</p>
+
+<p>eout javac abc.java > err.txt</p>
+
+<p>で、err.txtにリダイレクトされます。</p>
+
+<p>JavaのエラーメッセージををVisual Studio形式のエラーメッセージに変換するフィルタerconv.cppを書きました(この例は手抜きで引数処理や標準入力からの入力処理を書いてません。またエラーメッセージによっては問題が出るかもしれません)</p>
+<DIV align="center">
+<table border="1" cellpadding="10" width="50%" align=center>
+  <TBODY>
+    <TR>
+      <td align=left>
+      <pre>#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;fstream&gt;
+#include &lt;sstream&gt;
+
+using namespace std;
+
+int main(int argc, char* argv[])
+{
+  ifstream fin(&quot;err.txt&quot;);
+  string line;
+  while (getline(fin, line)) {
+    int e = line.find(&quot;.java:&quot;);
+    if (e &lt; line.length()) {
+      istringstream strm(line);
+      string s1, s2;
+      strm &gt;&gt; s1;
+      int start = s1.find_first_of(':');
+      int end = s1.find_last_of(':');
+      s1[start] = '(';
+      s1[end] = ')';
+      strm &gt;&gt; s2;
+      cout &lt;&lt; s1 &lt;&lt; &quot; : &quot; &lt;&lt; s2;
+    } else {
+      cout &lt;&lt; line &lt;&lt; endl;
+    }
+  }
+  return 0;
+}
+</pre>
+      </td>
+    </TR>
+  </TBODY>
+</table>
+</DIV>
+<p>次のようなバッチファイルj.batを用意します。eout.exeやerconv.exeはパスの通ったディレクトリにあるものとします。また、JDKのbinディレクトリにパスを通し、環境変数CLASSPATHも正しく設定しておきます。</p>
+<DIV align="center">
+<table border="1" cellpadding="10" width="50%" align=center>
+  <TBODY>
+    <TR>
+      <td align=left>@echo off<br>
+      REM Windows NTのばあいはこちらを使用<br>
+      javac %1 2> err.txt<br>
+      <br>
+      REM Windows 98の場合はこちらを使用<br>
+      REM eout javac %1 > err.txt<br>
+      erconv</td>
+    </TR>
+  </TBODY>
+</table>
+</DIV>
+<p>
+Visual Studioのメニュー「ツール(T)」→「カスタマイズ(C)」を選択し「カスタマイズ」ダイアログの「ツール」タブをクリックします。メニュー項目を１件追加し「Java」などの適当な名前を登録します。<br>
+「コマンド」「引数」「実行時のディレクトリ」を図のように設定します。アウトプットウィンドウの使用のチェックも忘れずに．．．</p>
+
+<p><center><img src="vsjava/vsj1.gif"></center>
+<p>するとツールメニューに「Java」が登録され、実行すると編集中のJavaファイルのコンパイルができ、エラーはアウトプットウィンドウに出力され、エラー行ジャンプが可能になります。</p>
+
+<h4>ちょっと便利に．．．．</h4>
+
+<p>
+○FileViewを利用する。<br>
+App WizardでUtility Projectなど、スケルトンを生成しない適当なプロジェクトを作り、作業対象のJavaファイルをすべて登録します。こうするとプロジェクト内のファイルが全てFileViewからブラウズでき作業が楽です。<br>
+</p>
+
+<p>
+○ショートカットキーを使う<br>
+「カスタマイズ」ダイアログの「キーボード」タブを選択、カテゴリのプルダウンから「ツール」を選択コマンドのUserTool7(ツールメニューの７番目に登録されている場合)を選択し、「新しいショートカットキー」の登録で未登録のショートカットを割り当てればショートカットキー一発でコンパイルが出来るようになります。
+</p>
+
+<p><center><img src="vsjava/vsj2.gif"></center>
+<br>
+
+<h4>あとがき</h4>
+
+<p>Visual J++をインストールしている環境なら、Visual StudioでJavaのソースファイルを開くとキーワードのハイライト表示やエディタのオートインデント機能なども使えるのだと思います(多分)。Class Viewにクラス情報を表示したりするのはちょっとムリでしょうが．．．Visual Studioのアドインを書けばやれなくはないのかもしれません。</p>
+
+<p>個人的には秀丸エディタでこんな機能が実現できればいいなと思います。ソースコードをパースして、ツリーに展開するクラスブラウザを実装し、秀丸とDDEで通信してソースコードにアクセスする。コンパイルやエラー行へのジャンプも一発。<br>
+どなたかこのようなものを作って公開していただければ助かります。(^^ゞ</p>
+
+<p>こんな風に思うのもForte for Java、JBuilderといったJavaベースの高機能IDEは、動作がヘビーで、使い勝手が今ひとつだからです。エディタだけでシンプルにコーディングしたいという気持ちも強いです。Meadow + JDEというのもありますが、Emacs苦手だし．．．秀丸マクロでも勉強してみようかしら。</p>
+
+<p><font color=#dd0000>2001.06.06 追記</font></p>
+<p>　この記事を書いてからしばらくjEditを使ってみました。Javaの開発環境としてはとても高機能です。Javaソースコードのキーワードハイライティング、JBrawserによるソースコードのブラウズ(クラス、メソッド単位)、コンパイルとエラー行表示、BeanConsoleによるプログラム起動など快適な環境を提供してくれます。しかし、なぜか動作が不安定で結局使用を断念しました。今後の安定に期待したいところです。とはいえ、jEditはJavaアプリケーションの可能性を示してくれたと思います。<br>
+　Cygwin + Meadow + JDEというのもしばらく使用しましたが、Cygwinの不具合なのか、よくNTがハングアップします。これまた使用を断念しました。<br></p>
+
+<p>
+　結局今はJBuilder4 Foundation を用いてコーディングしています。JBuileder のコンポーネントや画面デザイナ機能などは一切使っていません。3.5に比べるとエディタ部分やブラウジング機能が使いやすくなっています。また、ファイルの関連付け機能も追加され、ダブルクリックでプロジェクトファイルやJavaファイルをJBuilder のIDEで開くことができるようになっています。やっとIDEがJavaアプリだということをあまり意識しなくてもＯＫになった気がします。<br>
+　しかしJBuilder 4を快適に使うにはCPUパワーももちろんですが、ビデオカードもNVIDIA RIVA TNT2ぐらいのクラスでないと、他のネイティブアプリの表示が遅くなってしまい、使う気が失せてしまいます。秋葉原でGeForce2 MXのバルク品が\3,000程度(2001.05時点)ですのでビデオが遅いと感じたら差し替えるのもいいでしょう。
+</p>
+　JBuilder 5からはFoundation 版が無くなるみたいです。Enterprise、Professional、Personal
+というラインナップです。Professional版を買う必要があるのでしょうか？
+JDKのフロントエンドだけの使い方ならPersonal版でも十分と予想しているのですが。<FONT size="+1">(</FONT><FONT color="#dd0000">2001.07.14</FONT><FONT size="+1"> </FONT>Personal版ではJDKの差し替え機能がないことが判明。やはりProfessional
+版が必要なようです)
+<P>　<FONT color="#ff0000">2002.01.24 追記</FONT><BR>
+　JDKの差し替えは可能でした。Personal版 愛用してます。会社ではJBuilder6
+Professional Edition を購入しました。Java
+WorldのJBuilder 改造講座を参考にして、JUnit、JRefactoryなどを組み込み、JBuilder
+XP Edition にしてます。XPは実践できてませんが...</P>
+
+</body>
+</html>

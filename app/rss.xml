@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rdf:RDF
+  xmlns="http://purl.org/rss/1.0/"
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns:dc="http://purl.org/dc/elements/1.1/"
+  xmlns:admin="http://webns.net/mvcb/"
+  xml:lang="ja">
+  <channel rdf:about="https://kondoumh.com/rss.xml">
+    <title>kondoumh home</title>
+    <link>https://kondoumh.com</link>
+    <dc:date>2018-02-14T01:19:00+09:00</dc:date>
+    <description>kondoumh home アイデアプロセッサー iEdit を公開しています。</description>
+    <image rdf:resource="https://kondoumh.com/images/mh_s.png"/>
+    <items>
+      <rdf:Seq>
+        <rdf:li rdf:resource="https://kondoumh.com/index.html#he20180217"/>
+        <rdf:li rdf:resource="https://kondoumh.com/index.html#he20180214"/>
+        <rdf:li rdf:resource="https://kondoumh.com/index.html#he20161218"/>
+        <rdf:li rdf:resource="https://kondoumh.com/index.html#he20151230"/>
+        <rdf:li rdf:resource="https://kondoumh.com/index.html#he20150125"/>
+        <rdf:li rdf:resource="https://kondoumh.com/index.html#he20141230"/>
+        <rdf:li rdf:resource="https://kondoumh.com/index.html#he20141115"/>
+        <rdf:li rdf:resource="https://kondoumh.com/index.html#he20140824"/>
+        <rdf:li rdf:resource="https://kondoumh.com/index.html#he20140404"/>
+        <rdf:li rdf:resource="https://kondoumh.com/iedit.html#he20130818"/>
+        <rdf:li rdf:resource="https://kondoumh.com/iedit.html#he20130415"/>
+        <rdf:li rdf:resource="https://kondoumh.com/iedit.html#he20130308"/>
+        <rdf:li rdf:resource="https://kondoumh.com/software/iedit.html#he20121001"/>
+        <rdf:li rdf:resource="https://kondoumh.com/software/iedit.html#he20120613"/>
+        <rdf:li rdf:resource="https://kondoumh.com/index.html#he20120225"/>
+      </rdf:Seq>
+    </items>
+  </channel>
+  <image rdf:about="https://kondoumh.com/images/mh_s.png">
+    <title>kondoumh home</title>
+    <link>https://kondoumh.com</link>
+    <url>https://kondoumh.com/images/mh_s.png</url>
+  </image>
+
+  <item rdf:about="https://kondoumh.com/index.html#he20180217">
+    <title>HTTPS 対応しました。</title>
+    <link>https://kondoumh.com</link>
+    <dc:date>2018-02-17</dc:date>
+    <description>サイトを HTTPS に対応しました。</description>
+  </item>
+
+  <item rdf:about="https://kondoumh.com/index.html#he20180214">
+    <title>iEdit 2.30 リリース</title>
+    <link>https://kondoumh.com</link>
+    <dc:date>2018-02-14</dc:date>
+    <description>HiDPI 環境での描画を改善し、Windows 10 に対応しました。</description>
+  </item>
+
+  <item rdf:about="https://kondoumh.com/index.html#he20161218">
+    <title>Profile 更新</title>
+    <link>https://kondoumh.com/profile.html</link>
+    <dc:date>2016-12-18</dc:date>
+    <description>Profile を更新しました。</description>
+  </item>
+
+  <item rdf:about="https://kondoumh.com/index.html#he20151230">
+    <title>サイトデザインリニューアル</title>
+    <link>https://kondoumh.com</link>
+    <dc:date>2015-12-30</dc:date>
+    <description>サイトデザインをリニューアルしました。</description>
+  </item>
+
+  <item rdf:about="https://kondoumh.com/index.html#he20150125">
+    <title>iEdit 2.21 リリース</title>
+    <link>https://kondoumh.com</link>
+    <dc:date>2015-01-25</dc:date>
+    <description>HTML エクスポートの不具合修正です。</description>
+  </item>
+
+  <item rdf:about="https://kondoumh.com/index.html#he20141230">
+    <title>サイトをスマートデバイスに対応</title>
+    <link>https://kondoumh.com</link>
+    <dc:date>2014-12-30</dc:date>
+    <description>kondoumh.com をスマホやタブレットで読みやすくしました。</description>
+  </item>
+
+  <item rdf:about="https://kondoumh.com/index.html#he20141115">
+    <title>iEdit 2.20 リリース</title>
+    <link>https://kondoumh.com</link>
+    <dc:date>2014-11-15</dc:date>
+    <description>iEdit 2.20 リリース テキストエキスポートオプションにノード別のファイル出力、Markdown や Emacs/OrgMode への対応を加えました。</description>
+  </item>
+
+  <item rdf:about="https://kondoumh.com/index.html#he20140824">
+    <title>iEdit 2.12 リリース</title>
+    <link>https://kondoumh.com</link>
+    <dc:date>2014-08-24</dc:date>
+    <description>iEdit 2.12 リリース テキストエキスポートの不具合修正です。</description>
+  </item>
+
+  <item rdf:about="https://kondoumh.com/index.html#he20140404">
+    <title>構成見直し</title>
+    <link>https://kondoumh.com</link>
+    <dc:date>2014-04-04</dc:date>
+    <description>はてなブログへの移行に伴いリンク等修正。構成も少し見直しました。</description>
+  </item>
+
+  <item rdf:about="https://kondoumh.com/software/iedit.html#he20130818">
+    <title>iEdit 2.11 リリース</title>
+    <link>https://kondoumh.com</link>
+    <dc:date>2013-08-18</dc:date>
+    <description>iEdit 2.11 リリースしました。不具合修正のみです。Windows XP メンテナンスリリースは本リリースに統合しています。</description>
+  </item>
+  
+  <item rdf:about="https://kondoumh.com/software/iedit.html#he20130415">
+    <title>iEdit 2.10 リリース</title>
+    <link>https://kondoumh.com</link>
+    <dc:date>2013-04-15</dc:date>
+    <description>iEdit 2.10 リリースしました。Windows XP 向けメンテナンスリリースである 2.01 も同時にリリースしています。</description>
+  </item>
+  
+  <item rdf:about="https://kondoumh.com/software/iedit.html#he20121001">
+    <title>[改訂]Trac 入門 発売です。</title>
+    <link>https://kondoumh.com</link>
+    <dc:date>2013-03-08</dc:date>
+    <description>ITS のデファクトスタンダード Trac 1.0 リリースとともに「Trac 入門」も5年ぶりの改訂。最新の動向とプロジェクトでの適用から内容も大幅アップデート＆ブラッシュアップしました。</description>
+  </item>
+
+  <item rdf:about="https://kondoumh.com/software/iedit.html#he20121001">
+    <title>iEdit 2.00 リリース</title>
+    <link>https://kondoumh.com</link>
+    <dc:date>2012-10-01</dc:date>
+    <description>iEdit 2.00 リリースして、メジャーバージョンがとうとう上がりました。ノード割り込ませ機能を追加するなど。</description>
+  </item>
+
+  <item rdf:about="https://kondoumh.com/software/iedit.html#he20120613">
+    <title>iEdit 1.99 リリース</title>
+    <link>https://kondoumh.com</link>
+    <dc:date>2012-06-13</dc:date>
+    <description>iEdit 1.99 リリースしました。バグフィクス1件、仕様変更1件 </description>
+  </item>
+
+  <item rdf:about="https://kondoumh.com/index.html#he20120225">
+    <title>kondoumh.com ドメインに移転しました。</title>
+    <link>https://kondoumh.com</link>
+    <dc:date>2012-02-25</dc:date>
+    <description>10年以上間借りしていた nifty のホームページから kondoumh.com ドメインに移転しました。</description>
+  </item>
+
+</rdf:RDF>

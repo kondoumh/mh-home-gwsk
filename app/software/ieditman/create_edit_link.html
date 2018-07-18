@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<head>
+<title>リンクの作成・編集</title>
+<meta http-equiv="content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<link href="content.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<h1>リンクの作成と編集</h1>
+
+<h2><a name="create" id="create">リンク作成：２つの方法</a></h2>
+<h3>方法１</h3>
+<p>ノードを作成後、ツールバーからリンクの追加ボタン(矢印なし、一方向矢印、双方向矢印のいずれか)を選択し、ネットワークビュー上で関連付けたいノード間にドローツールの要領で線を引くことでリンクが張られます。</p>
+<div class="imgbox"><img src="addlink1.gif" /></div>
+
+<h3>方法２</h3>
+<p>アウトラインビューの右クリックメニューで、「別のノードへのリンク」を選択するとマウスカーソルの形状が変化します。</p>
+<div class="imgbox"><img src="addlink2.gif" /></div>
+<p>この状態でアウトラインビューの他のノードをクリックするとリンク設定ダイアログが起動しリンクを張れます。この方法で階層の異なるノード間のリンクを設定することが出来ます。</p>
+<div class="imgbox"><img src="addlink3.gif" /></div>
+<p>※ちなみに、ネットワークビューで「すべての階層のノードを表示」というモードにすれば階層の異なるノード間のリンクを方法１で作成することも可能です。</p>
+
+<h2><a name="edit" id="edit">リンクの編集</a></h2>
+<p>リンクを編集するには、ネットワークビュー上でリンクをダブルクリックするか、リンクを選択してコンテキストメニューから「リンクのプロパティ」を選ぶことでダイアログが起動し、プロパティを編集できます。線種や色、スタイルをコンテキストメニューから個別に設定することも可能です。書式設定ツールバーを利用して設定することもできます。</p>
+<div class="imgbox"><img src="linkprop.png" alt="link property setting" /></div>
+<div class="detail"><a href="iedx/linkprop_dialog.html" target="_blank">リンクプロパティ設定ダイアログの詳細</a></div>
+
+<p>リンクにはコメントを付けることができ、コメントはネットワークビューでノード間の関連名として表示されます</p>
+<div class="imgbox"><img src="link_a_2_b.png" alt="link between A and B" /></div>
+<p>ネットワークビューで、リンク線の真中をドラッグ＆ドロップすることでリンクを曲げることができます。リンクコメントはリンクの曲点で表示されます。リンクコメントがない場合、曲点は小さな矩形のアンカーとして表示されていますので、このアンカーをドラッグ＆ドロップすることで曲げ具合を調整することができます。</p>
+<div class="imgbox"><img src="link_curve.png" alt="link curve" /></div>
+
+<h2><a name="change" id="change">リンクの張替え</a></h2>
+リンクの張替え機能は、既存のリンクの別のノードに接続しなおす機能です。リンクを消して新しいリンクを追加する方法では、リンク属性を再設定する必要があるため、こちらの方法をお勧めします。
+<table align="center">
+  <tr>
+    <td><img src="alterlink0.gif" /><div class="caption">1:初期状態です</div></td>
+    <td><img src="alterlink1.gif" /><div class="caption">2:リンクの端をクリックするとアンカー(○)が出ます</div></td>
+  </tr>
+  <tr>
+    <td><img src="alterlink2.gif" /><div class="caption">3:マウスをホールドしたままドラッグします</div></td>
+    <td><img src="alterlink3.gif" /><div class="caption">4:張り替えたいノードの上でボタンを離すと</div></td>
+  </tr>
+  <tr>
+    <td><img src="alterlink4.gif" /><div class="caption">5:リンクの張替えが完了です。</div></td>
+  </tr>
+</table>
+<h2><a name="reverse" id="reverse"></a>リンク方向の反転</h2>
+リンクの方向の反転とは、リンク元のノードとリンク先のノードを入れ替える機能です。
+<div class="imgbox"><img src="alterlink5.gif" /></div>
+<div class="caption">リンク上で右クリックし「リンクの向きを反転させる」を選択すると．．</div>
+<div class="imgbox"><img src="alterlink6.gif" /></div>
+<div class="caption">リンクが反転します</div>
+
+<h2 align="left"><a name="context" id="context"></a>コンテキストメニューによるリンクの矢印設定</h2>
+<p>リンク設定ダイアログを開かなくても、右クリックでリックを選択すると、メニューから矢印の種類を設定できます。</p>
+<div class="imgbox"><img src="context_arrow.png" /></div>
+
+<h2><a name="delete" id="delete"></a>リンクの削除</h2>
+<p>ネットワークビューでリンクを削除するには、リンクを選択してDELキーを押すかコンテキストメニューから「削除」を選びます。また、リンクが付いているノードを消すことでもリンクは削除されます。<p>
+<p>リンクはリンクビューから削除することも可能です。</p>
+
+<h3>複数リンクの一括削除</h3>
+<p>複数のリンクを一括削除するには、ネットワークビューで削除したいリンクを囲むようにノードを複数選択します。この状態でコンテキストメニューから「削除:選択範囲のリンク」を選ぶことで、選択範囲のリンクのみをすべて削除することができます。</p>
+<div class="imgbox"><img src="deletelinks.png" /></div>
+<p>図の例では、選択範囲に含まれる2本のリンク(B⇒C、D⇒E)が削除対象となります。A⇒Bのリンクは削除されません。
+<div class="imgbox"><img src="deletelinks2.png"/></div>
+
+<h2><a name="default" id="default"></a>リンクデフォルト設定</h2>
+<p>リンクの線種や矢印の付き方などのプロパティをデフォルトで指定したい場合は、メニューから「ツール」⇒「オプション」⇒「リンク」タブで指定することが可能です。
+<div class="imgbox"><img src="link_default_property.png"/></div>
+<p>リンクの結合強度を変えることで自動レイアウト、芋づるモード、MindMap的キーバインドでのノード間の距離を変えることができます。</p>
+<div class="detail"><a href="iedx/options.html" target="_blank">プロパティ設定ダイアログの詳細</a></div>
+
+</body>
+</html>
