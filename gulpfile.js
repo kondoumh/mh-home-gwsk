@@ -29,6 +29,7 @@ var pagespeed = require('psi');
 var reload = browserSync.reload;
 var gutil = require('gulp-util');
 var useref = require('gulp-useref');
+var merge = require('merge-stream');
 
 var AUTOPREFIXER_BROWSERS = [
   'ie >= 10',
@@ -53,21 +54,63 @@ gulp.task('jshint', function () {
 
 // Optimize images
 gulp.task('images', function () {
-  return gulp.src('app/images/**/*')
+  var main = gulp.src('app/images/**/*')
     .pipe($.cache($.imagemin({
       progressive: true,
       interlaced: true
     })))
     .pipe(gulp.dest('dist/images'))
     .pipe($.size({title: 'images'}));
+  var ied = gulp.src('app/software/iedit/images/*')
+    .pipe($.cache($.imagemin({
+      progressive: true,
+      interlaced: true
+    })))
+    .pipe(gulp.dest('dist/software/iedit/images'))
+    .pipe($.size({title: 'images'}));
+  var iedmg = gulp.src('app/software/ieditman/*.gif')
+    .pipe($.cache($.imagemin({
+      progressive: true,
+      interlaced: true
+    })))
+    .pipe(gulp.dest('dist/software/ieditman'))
+    .pipe($.size({title: 'images'}));
+  var iedmp = gulp.src('app/software/ieditman/*.png')
+    .pipe($.cache($.imagemin({
+      progressive: true,
+      interlaced: true
+    })))
+    .pipe(gulp.dest('dist/software/ieditman'))
+    .pipe($.size({title: 'images'}));
+  var iedmj = gulp.src('app/software/ieditman/*.jpg')
+    .pipe($.cache($.imagemin({
+      progressive: true,
+      interlaced: true
+    })))
+    .pipe(gulp.dest('dist/software/ieditman'))
+    .pipe($.size({title: 'images'}));
+  var bc = gulp.src('app/software/bc/images/*')
+    .pipe($.cache($.imagemin({
+      progressive: true,
+      interlaced: true
+    })))
+    .pipe(gulp.dest('dist/software/bc/images'))
+    .pipe($.size({title: 'images'}));
+  var three = gulp.src('app/software/3dplot/images/*')
+    .pipe($.cache($.imagemin({
+      progressive: true,
+      interlaced: true
+    })))
+    .pipe(gulp.dest('dist/software/3dplot/images'))
+    .pipe($.size({title: 'images'}));
+  return merge(main, ied, iedmg, iedmp, iedmj, bc, three);
 });
 
 // Copy all files at the root level (app)
 gulp.task('copy', function () {
   return gulp.src([
     'app/*',
-    '!app/*.html',
-    'node_modules/apache-server-configs/dist/.htaccess'
+    '!app/*.html'
   ], {
     dot: true
   }).pipe(gulp.dest('dist'))
