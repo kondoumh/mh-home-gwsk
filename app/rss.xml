@@ -13,6 +13,7 @@
     <image rdf:resource="https://kondoumh.com/images/mh_s.png"/>
     <items>
       <rdf:Seq>
+        <rdf:li rdf:resource="https://kondoumh.com/index.html#he20180722"/>
         <rdf:li rdf:resource="https://kondoumh.com/index.html#he20180217"/>
         <rdf:li rdf:resource="https://kondoumh.com/index.html#he20180214"/>
         <rdf:li rdf:resource="https://kondoumh.com/index.html#he20161218"/>
@@ -36,6 +37,13 @@
     <link>https://kondoumh.com</link>
     <url>https://kondoumh.com/images/mh_s.png</url>
   </image>
+
+  <item rdf:about="https://kondoumh.com/index.html#he20180722">
+    <title>HTTPS 対応しました。</title>
+    <link>https://kondoumh.com</link>
+    <dc:date>2018-07-22</dc:date>
+    <description>サイトの構成を見直し、多少の修正を行いました。</description>
+  </item>
 
   <item rdf:about="https://kondoumh.com/index.html#he20180217">
     <title>HTTPS 対応しました。</title>
