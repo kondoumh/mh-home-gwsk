@@ -8,11 +8,12 @@
   <channel rdf:about="https://kondoumh.com/rss.xml">
     <title>kondoumh home</title>
     <link>https://kondoumh.com</link>
-    <dc:date>2018-02-14T01:19:00+09:00</dc:date>
+    <dc:date>2018-09-16T01:20:00+09:00</dc:date>
     <description>kondoumh home アイデアプロセッサー iEdit を公開しています。</description>
     <image rdf:resource="https://kondoumh.com/images/mh_s.png"/>
     <items>
       <rdf:Seq>
+        <rdf:li rdf:resource="https://kondoumh.com/index.html#he20180916"/>
         <rdf:li rdf:resource="https://kondoumh.com/index.html#he20180722"/>
         <rdf:li rdf:resource="https://kondoumh.com/index.html#he20180217"/>
         <rdf:li rdf:resource="https://kondoumh.com/index.html#he20180214"/>
@@ -37,6 +38,13 @@
     <link>https://kondoumh.com</link>
     <url>https://kondoumh.com/images/mh_s.png</url>
   </image>
+
+  <item rdf:about="https://kondoumh.com/index.html#he20180916">
+    <title>iEdit 2.40 リリース</title>
+    <link>https://kondoumh.com</link>
+    <dc:date>2018-09-16</dc:date>
+    <description>JSON インポート・エクスポート機能を追加しました。</description>
+  </item>
 
   <item rdf:about="https://kondoumh.com/index.html#he20180722">
     <title>サイト構成を見直しました。</title>
